@@ -1,4 +1,6 @@
-document.write("Exercise 1.3" + "<br>")
+document.write("Exercise 3<br><br>")
+
+let a, b, c;
 
 a = parseInt(prompt("Input value of a"))
 b = parseInt(prompt("Input value of b"))
