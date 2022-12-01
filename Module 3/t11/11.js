@@ -92,6 +92,7 @@ const picArray = [
   },
 ];
 
+
 const pics = document.getElementById("pictures");
 
 for (let i = 0; i < picArray.length; i++) {
@@ -103,7 +104,7 @@ for (let i = 0; i < picArray.length; i++) {
   h2.innerText  = picArray[i].title;           
   p.innerHTML   = picArray[i].description;
  
-  const fig     = document.createElement("figure");           //Create <figure>
+  const fig     = document.createElement("figure");  
   const img     = document.createElement("img");
   const figcap  = document.createElement("figcaption");
   
@@ -118,5 +119,31 @@ for (let i = 0; i < picArray.length; i++) {
   art.appendChild(fig);
   art.appendChild(p);
 
-  pics.appendChild(art);
-}
+  pics.appendChild(art);  
+
+
+  //t11 
+  const dlg       = document.getElementsByTagName("dialog")[0];
+  const dlg_span  = dlg.getElementsByTagName("span")[0];
+  const dlg_img   = dlg.getElementsByTagName("img")[0];
+
+  art.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    dlg_img.src = picArray[i].image.large;
+    dlg_img.alt = "large-image";
+    dlg.showModal();     
+  })
+  
+  dlg_span.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    dlg_img.removeAttribute("src");
+    dlg_img.removeAttribute("alt");
+    dlg.close();
+  })
+};
+
+
+
+  
