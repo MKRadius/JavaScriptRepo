@@ -1,4 +1,4 @@
-function defrag(str) {
+function frag(str) {
     let new_str;
 
     if (str.includes("+")) {
@@ -41,7 +41,7 @@ document.getElementById("start").addEventListener("click", (e) => {
     e.preventDefault();
 
     const str = document.getElementById("calculation").value;
-    const [num1, num2, choice] = defrag(str);
+    const [num1, num2, choice] = frag(str);
     const result = calculator(num1, num2, choice);
 
     document.getElementById("result").innerText = `Result: ${result}`;
