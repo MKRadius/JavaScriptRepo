@@ -21,7 +21,7 @@ document.getElementById("search-button").addEventListener("click", async (e) => 
         checkContainer.remove();
     }
 
-    const keyword = document.getElementById("searchbox").value;
+    const keyword = document.getElementById("search-box").value;
     //console.log(keyword);
     const apiResult = await getTVMazeInfo(keyword);
     //console.log(apiResult);
@@ -83,5 +83,26 @@ document.getElementById("search-button").addEventListener("click", async (e) => 
     }
 
     document.body.appendChild(container);
+
+
+    /*
+    const dlg = document.createElement("dialog");
+
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        dlg_img.src = picArray[i].image.large;
+        dlg_img.alt = "large-image";
+        dlg.showModal();     
+    })
+    
+    dlg_span.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        dlg_img.removeAttribute("src");
+        dlg_img.removeAttribute("alt");
+        dlg.close();
+    })*/
+
 })
 
