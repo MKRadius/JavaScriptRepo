@@ -37,16 +37,15 @@ document.getElementById("search-button").addEventListener("click", async (e) => 
 
         art.classList.add("card");
         genre.classList.add("genre");
-        genre.innerText = "Genres: ";
 
         if (apiResult[i].show.genres.length === 0) {
-            genre.innerText += "Unknown";
+            genre.innerText = "Unknown";
         }
         else if (apiResult[i].show.genres.length === 1) {
-            genre.innerText += apiResult[i].show.genres;
+            genre.innerText = apiResult[i].show.genres;
         }
         else {
-            genre.innerText += apiResult[i].show.genres[0];
+            genre.innerText = apiResult[i].show.genres[0];
             for (let j = 1; j < apiResult[i].show.genres.length; j++) {
                 genre.innerText += ` | ${apiResult[i].show.genres[j]}`;
             }
@@ -61,9 +60,8 @@ document.getElementById("search-button").addEventListener("click", async (e) => 
         name.innerText  = apiResult[i].show.name;
         
         link.target     = "_blank";
-        link.innerText  = "Link to TV Maze";
-        link.href       = apiResult[i].show.url;
-
+        link.innerText  = "Link";
+        //link.href       = apiResult[i].show.url;
 
         if (apiResult[i].show.image === null) {
             img_med.src = "https://via.placeholder.com/100x200?text=No+image";
@@ -72,8 +70,8 @@ document.getElementById("search-button").addEventListener("click", async (e) => 
             img_med.src = apiResult[i].show.image.medium;
         }
 
-        img_med.alt     = "image";
-        summary.innerHTML = apiResult[i].show.summary;
+        img_med.alt         = "image";
+        summary.innerHTML   = apiResult[i].show.summary;
 
         art.appendChild(img_med);
         art.appendChild(name);
@@ -82,12 +80,45 @@ document.getElementById("search-button").addEventListener("click", async (e) => 
         art.appendChild(summary);
 
         container.appendChild(art);
-    }
-
-    document.body.appendChild(container);
 
 
+        ///////Step 5///////
+        const checkdlg = document.getElementById("dialog");
+        if (checkdlg !== null) {
+            checkdlg.remove();
+        }
     
+        const dlg = document.createElement("dialog");
+        const dlg_span = document.createElement("span");
+        const dlg_iframe = document.createElement("iframe");
 
+        dlg_span.innerHTML = "<p>&#x2715;</p>";
+        dlg.appendChild(dlg_span);
+
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            dlg_iframe.src = apiResult[i].show.url;
+            dlg_iframe.title = "TVMazeShows";
+            dlg_iframe.width = "800px";
+            dlg_iframe.height = "600px";   
+            dlg_iframe.referrerPolicy = "strict-origin-when-cross-origin";         
+
+            dlg.appendChild(dlg_iframe);
+            document.body.appendChild(dlg);
+            dlg.showModal();     
+        })
+        
+        dlg_span.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            dlg_iframe.removeAttribute("src");
+            dlg_iframe.removeAttribute("title");
+            dlg.removeChild(dlg_iframe);
+            dlg.close();
+            document.body.removeChild(dlg);
+        })
+    }
+    document.body.appendChild(container);
 })
 
