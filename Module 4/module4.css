@@ -82,9 +82,27 @@ article h3 {
 
 article a {
     text-decoration: none;
+    cursor: pointer;
 }
 
 .summary p {
     text-align: justify;
     margin: 0 0 0 0;
+}
+
+dialog span {
+    position: absolute;
+    cursor: pointer;
+    top: 5px;
+    right: 10px;
+    font-size: 40px;
+}
+
+dialog span p {
+    margin: 0 0 0 0;
+}
+
+dialog iframe {
+    margin: 50px 0 0 0;
+    border: none;
 }

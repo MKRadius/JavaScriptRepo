@@ -1,7 +1,7 @@
 async function getTVMazeInfo(keyword) {
     let json_response;
     try {
-        const response  = await fetch ("https://api.tvmaze.com/search/shows?q=" + keyword);
+        const response  = await fetch("https://api.tvmaze.com/search/shows?q=" + keyword);
         json_response   = await response.json();
     } 
     catch (error) {
@@ -60,7 +60,7 @@ document.getElementById("search-button").addEventListener("click", async (e) => 
         name.innerText  = apiResult[i].show.name;
         
         link.target     = "_blank";
-        link.href       = apiResult[i].show.url;
+        //link.href       = apiResult[i].show.url;
         link.innerText  = "Link";
 
         if (apiResult[i].show.image === null) {
@@ -80,29 +80,54 @@ document.getElementById("search-button").addEventListener("click", async (e) => 
         art.appendChild(summary);
 
         container.appendChild(art);
+
+
+        const checkdlg = document.getElementById("dialog");
+        if (checkdlg !== null) {
+            checkdlg.remove();
+        }
+    
+        const dlg = document.createElement("dialog");
+        const dlg_span = document.createElement("span");
+        const dlg_iframe = document.createElement("iframe");
+
+        dlg_span.innerHTML = "<p>&#x2715;</p>";
+        dlg.appendChild(dlg_span);
+
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            //dlg_img.src = picArray[i].image.large;
+            //dlg_img.alt = "large-image";
+            dlg_iframe.src = apiResult[i].show.url;
+            dlg_iframe.title = "TVMazeShows";
+            dlg_iframe.width = "800px";
+            dlg_iframe.height = "600px";            
+
+            dlg.appendChild(dlg_iframe);
+            document.body.appendChild(dlg);
+            dlg.showModal();     
+        })
+        
+        dlg_span.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            //dlg_img.removeAttribute("src");
+            //dlg_img.removeAttribute("alt");
+            dlg_iframe.removeAttribute("src");
+            dlg_iframe.removeAttribute("title");
+            dlg.removeChild(dlg_iframe);
+            dlg.close();
+            document.body.removeChild(dlg);
+        })
+
+
     }
 
     document.body.appendChild(container);
 
 
-    /*
-    const dlg = document.createElement("dialog");
-
-    link.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        dlg_img.src = picArray[i].image.large;
-        dlg_img.alt = "large-image";
-        dlg.showModal();     
-    })
     
-    dlg_span.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        dlg_img.removeAttribute("src");
-        dlg_img.removeAttribute("alt");
-        dlg.close();
-    })*/
 
 })
 
