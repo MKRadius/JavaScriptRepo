@@ -99,6 +99,7 @@ article > p {
 article a {
     text-decoration: none;
     cursor: pointer;
+    color: rgb(6, 69, 173);
 }
 
 .summary p {
