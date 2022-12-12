@@ -65,7 +65,7 @@ document.getElementById("search-button").addEventListener("click", async (e) => 
         //link.href       = apiResult[i].show.url;
 
         if (apiResult[i].show.image === null) {
-            img_med.src = "https://via.placeholder.com/100x200?text=No+image";
+            img_med.src = "https://via.placeholder.com/200x300";
         }
         else {
             img_med.src = apiResult[i].show.image.medium;
