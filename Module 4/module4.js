@@ -31,12 +31,11 @@ document.getElementById("search-button").addEventListener("click", async (e) => 
     container.id = "container";
 
     for (let i = 0; i < apiResult.length; i++) {
-        const art       = document.createElement("article");
-        const img_a     = document.createElement("a");
-        const img_med   = document.createElement("img");
-        const name      = document.createElement("h3");
-        const genre     = document.createElement("p");
+        const art   = document.createElement("article");
+        const name  = document.createElement("h3");
+        const genre = document.createElement("p");
         const link      = document.createElement("a");
+        const img_med   = document.createElement("img");
         const summary   = document.createElement("div");
 
         summary.classList.add("summary");
@@ -48,19 +47,14 @@ document.getElementById("search-button").addEventListener("click", async (e) => 
         //link.href       = apiResult[i].show.url;
 
         if (apiResult[i].show.image === null) {
-            img_a.href = "https://placeholder.com";
-            img_a.innerHTML = "<img src='https://via.placeholder.com/200x300' alt='img'>";
-            art.appendChild(img_a);
+            img_med.src = "https://via.placeholder.com/200x300";
         }
         else {
             img_med.src = apiResult[i].show.image.medium;
-            art.appendChild(img_med);
         }
 
-        img_med.alt         = "image";
-        summary.innerHTML   = apiResult[i].show.summary;
-        
-        
+        img_med.alt = "image";
+
         art.classList.add("card");
         genre.classList.add("genre");
         genre.innerText = "Genres: ";
@@ -78,6 +72,10 @@ document.getElementById("search-button").addEventListener("click", async (e) => 
             }
         }
 
+        
+        summary.innerHTML   = apiResult[i].show.summary;
+
+        art.appendChild(img_med);
         art.appendChild(name);
         art.appendChild(genre);
         art.appendChild(link);
